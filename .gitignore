@@ -1,0 +1,3 @@
+# Real test fixtures may contain sensitive company data
+dev/test-fixtures/real/*.md
+!dev/test-fixtures/real/README.md
