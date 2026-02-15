@@ -126,8 +126,8 @@ again." Malformed output: parse what is usable; if score missing, recompute from
 3. **Recompute dimension scores using diminishing returns + strength credits:**
    For each dimension, take the subagent's raw total deductions and apply diminishing returns:
    - First 30 points of deductions: apply at 100% (effective = raw)
-   - Points 31-50: apply at 50% (effective = 30 + (raw - 30) × 0.5)
-   - Points 51+: apply at 25% (effective = 40 + (raw - 50) × 0.25)
+   - Points 31-50: apply at 75% (effective = 30 + (raw - 30) × 0.75)
+   - Points 51+: apply at 50% (effective = 45 + (raw - 50) × 0.50)
    Then add strength credits from the STRENGTH LOG (capped at +25 per dimension):
    **dimension_score = 100 - effective_deductions + credits** (minimum 0, maximum 100)
    If the subagent's declared score differs from this calculation, use THIS calculation.

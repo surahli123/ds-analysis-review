@@ -50,7 +50,8 @@ updating all three agent prompts.
 
 | Issue Type | Lens | Severity | Deduction | Example |
 |---|---|---|---|---|
-| Missing or ineffective TL;DR | Structure & TL;DR | MAJOR | -10 | Proactive: opens with methodology instead of key insight + business impact. Reactive: opens with background instead of answering the question asked |
+| TL;DR completely absent | Structure & TL;DR | CRITICAL | -12 | No executive summary, no upfront conclusion, no key insight anywhere in the top 20% of the document. Distinct from an ineffective TL;DR — this is total absence. |
+| Missing or ineffective TL;DR | Structure & TL;DR | MAJOR | -10 | Proactive: opens with methodology instead of key insight + business impact. Reactive: opens with background instead of answering the question asked. Use this when a TL;DR exists but is weak or buried — not when it is completely absent. |
 | No clear story arc or structure | Structure & TL;DR | MAJOR | -8 | Reader can't follow the argument from setup to conclusion |
 | Buried key finding | Structure & TL;DR | MAJOR | -10 | "So what" appears on page 8 instead of upfront |
 | Generic/non-actionable headings | Structure & TL;DR | MINOR | -3 | Heading says "Results" instead of "Churn dropped 15% after intervention" |
