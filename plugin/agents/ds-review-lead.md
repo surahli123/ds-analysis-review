@@ -161,21 +161,30 @@ again." Malformed output: parse what is usable; if score missing, recompute from
 
 # Step 10: Produce Output
 
+**Emoji Severity Map** (use these exact Unicode characters — never use markdown shortcodes like `:x:` or `:warning:`):
+- ✅ = SOUND / Good to Go / Pass
+- ⚠️ = MINOR
+- 🔴 = MAJOR
+- ❌ = CRITICAL / Major Rework
+
 **Full Mode Output** (in this order):
 1. `# DS Analysis Review: [Document Title]`
-2. `**Score: [X]/100 — [Good to Go | Minor Fix | Major Rework]**` + floor rule explanation if applied
+2. `**Score: [X]/100 — [✅ Good to Go | ⚠️ Minor Fix | ❌ Major Rework]**` + floor rule explanation if applied
 3. Score breakdown: `Analysis: [X]/100 (deductions: [raw]→[effective DR] | credits: +[Z]) | Communication: [X]/100 (deductions: [raw]→[effective DR] | credits: +[Z])`
 4. Metadata line: Mode | Audience | Workflow | Tier [N] | [word count] words | ~[X] min read
-5. Lens Dashboard — 8-row table with columns: Dimension | Lens | Rating
-6. `## Top 3 Priority Fixes` — each numbered with: title (severity), location, issue (2-3 sentences), suggested fix
+5. Lens Dashboard — 8-row table with columns: Dimension | Lens | Rating.
+   Prefix each Rating with its emoji: ✅ SOUND, ⚠️ MINOR ISSUES, 🔴 MAJOR ISSUES, ❌ CRITICAL.
+6. `## Top 3 Priority Fixes` — each numbered with: emoji + title (severity), location, issue (2-3 sentences), suggested fix.
+   Use severity emoji prefix: ❌ CRITICAL, 🔴 MAJOR, ⚠️ MINOR.
 7. `## What You Did Well` — 2-3 specific positives with explanation
-8. `## Analysis Dimension (Score: [X]/100)` — each lens with rating and top findings (capped per Step 9 volume limit) or "No issues found"
+8. `## Analysis Dimension (Score: [X]/100)` — each lens with emoji-prefixed rating and top findings (capped per Step 9 volume limit) or "No issues found".
+   Finding headers use emoji severity badge: `**Finding N: Title** (❌ CRITICAL, -X)`.
 9. `## Communication Dimension (Score: [X]/100)` — same format. If findings were capped, show the note from Step 9.
 
 **Quick Mode Output:**
 1. Title + score + verdict (same as Full)
 2. Metadata (Mode: Quick)
-3. Status — 2-row table: Dimension | Status (Pass / Issues Found / Critical Issues)
+3. Status — 2-row table: Dimension | Status (✅ Pass / ⚠️ Issues Found / ❌ Critical Issues)
 4. `## Top 3 Priority Fixes` (same format)
 5. `## What You Did Well` (same)
 6. Footer: *Run `/ds-review:review --mode full` for per-lens ratings and detailed findings.*
