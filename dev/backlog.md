@@ -244,12 +244,13 @@ Last updated: 2026-02-16
 
 ### v0.5: Domain Knowledge Dimension + Genre Awareness
 
-**Design Complete — Ready to Implement**
+**Design & Planning Complete — Ready to Implement Layer 1**
 
+#### Done — Design (2026-02-15 to 2026-02-16)
 - [x] **Design doc v3 complete** — `docs/plans/2026-02-15-domain-knowledge-subagent-design-v3.md`
   - 3rd review dimension: domain expertise + claim verification (3 lenses, Lens 4 merged into Lens 2)
   - **Architecture:** Standalone Domain Knowledge Skill (Layer 1) + Thin Domain Expert Reviewer (Layer 2)
-  - Layer 1: YAML index, team roster, digests, refresh pipeline, importance scoring, token budgeting
+  - Layer 1: YAML index, digests, refresh pipeline, importance scoring, token budgeting
   - Layer 2: 3 lenses, deduction tables, scoring rubric, calls Layer 1 for context
   - 21 design decisions finalized, 8 gaps resolved in v3
   - Weighted scoring: 50/25/25 (Analysis / Communication / Domain)
@@ -257,19 +258,30 @@ Last updated: 2026-02-16
   - Two-tier digest system: foundational (monthly) + workstream (weekly)
   - Deduplication: two-stage (heuristic + LLM fallback)
   - Versioned digests with rollback support
-- [x] **Design session log** — `dev/sessions/2026-02-15-domain-knowledge-session-log.md`
+- [x] **MVP design review** — `docs/plans/2026-02-16-domain-knowledge-mvp-design.md`
+  - 5 challenges resolved (A1-A5): file contract, audience tags, manual refresh, no roster, additive cross-domain budget
+  - Token budget: 8K/domain + 1.5K cross-domain (additive)
+  - search-infra deferred (least useful for DS review MVP)
+- [x] **Layer 1 implementation plan** — `docs/plans/2026-02-16-domain-knowledge-layer1-implementation-plan.md`
+  - 5 tasks: domain-index.yaml, SKILL.md contract, 3 digest files
+  - Full file contents specified, validation steps, commit strategy
+  - Markdown + YAML only, no scripts or dependencies
+- [x] **Design session logs** — `dev/sessions/2026-02-15-domain-knowledge-session-log.md`, `dev/sessions/2026-02-16-domain-knowledge-layer1-planning.md`
 - [x] **Repository structure prepared** — `shared/skills/search-domain-knowledge/` ready for implementation
 
-**Next Steps (Implementation):**
-- [ ] Build `shared/skills/search-domain-knowledge/` per design doc v3
-  - Phase 1a: Domain Knowledge Skill (Layer 1) - YAML index, refresh pipeline, digest generation
-  - Phase 1b: Domain Expert Reviewer (Layer 2) - 3-lens rubric, authority-aware scoring
-  - Phase 1c: Integration with DS Review Lead - Step 6.5, weighted scoring, deduplication
-  - Phase 2: Test & Calibrate - 6 fixtures (3 core + 3 blog posts), recalibration rounds
-  - Phase 3: Polish - CHANGELOG, ADR, documentation
-- [ ] Create `agents/ds-review/domain-expert-reviewer.md`
-- [ ] Update `agents/ds-review/ds-review-lead.md` for 3-dimension scoring
-- [ ] Update `shared/skills/ds-review-framework/SKILL.md` with domain dimension rubrics
+#### Next — Layer 1 Implementation (next session)
+- [ ] Execute Layer 1 plan: `docs/plans/2026-02-16-domain-knowledge-layer1-implementation-plan.md`
+  - Task 1: domain-index.yaml (curated YAML index, 2 sub-domains + cross-domain)
+  - Task 2: SKILL.md (digest format contract, consumption guide, staleness rules)
+  - Task 3: search-ranking.md digest (foundational knowledge + workstream placeholders)
+  - Task 4: query-understanding.md + search-cross-domain.md digests
+  - Task 5: Validation and cleanup
+
+#### Future — Layer 2 & 3 (after Layer 1 validated)
+- [ ] Create `agents/ds-review/domain-expert-reviewer.md` (3 lenses, authority-aware scoring)
+- [ ] Update `shared/skills/ds-review-framework/SKILL.md` with domain dimension rubrics + ADVISORY severity
+- [ ] Update `agents/ds-review/ds-review-lead.md` for 3-dimension scoring (--domain flag, 50/25/25)
+- [ ] Update `plugin/commands/review.md` with --domain, --reference, --refresh-domain flags
 - [ ] Calibration R4+: Test with domain dimension, adjust DR curve if needed
 - [ ] Evaluate whether recalibrated scores are reasonable across genres without format detection
 - [ ] If still off: design `--format` parameter or auto-detection (ADR needed)
