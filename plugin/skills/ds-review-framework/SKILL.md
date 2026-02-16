@@ -40,7 +40,7 @@ updating all three agent prompts.
 | Unstated critical assumption | Methodology & Assumptions | CRITICAL | -20 | Causal claim without stating comparability assumption |
 | Flawed statistical methodology | Methodology & Assumptions | CRITICAL | -20 | Using correlation to claim causation without acknowledgment |
 | Unacknowledged sampling/selection bias | Methodology & Assumptions | MAJOR | -10 | Conclusions from non-representative sample without acknowledging limitation |
-| Conclusion doesn't trace to evidence | Logic & Traceability | CRITICAL | -15 | Backward check fails — recommendation has no supporting finding |
+| Conclusion doesn't trace to evidence | Logic & Traceability | MAJOR | -10 | Backward check fails — recommendation has no supporting finding |
 | Unsupported logical leap | Logic & Traceability | MAJOR | -10 | Key finding not backed by presented evidence |
 | Misrepresented source/benchmark | Completeness & Source Fidelity | MAJOR | -8 | "Industry average is X" but source says Y |
 | Missing obvious analysis | Completeness & Source Fidelity | MAJOR | -8 | Obvious follow-up question unaddressed |
