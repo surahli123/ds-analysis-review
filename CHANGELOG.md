@@ -2,6 +2,76 @@
 
 All notable changes to DS Productivity Agents (formerly DS Analysis Review Agent).
 
+## [Unreleased]
+
+### v0.5 — Domain Expert Agent: Design & Planning (2026-02-16)
+
+**Status:** Design complete. Implementation plan ready. No code written yet.
+
+**Goal:** Add a 3rd review dimension (Domain Knowledge) to the DS Review agent. Standalone Domain Knowledge Skill (Layer 1) that any agent can consume, plus a thin Domain Expert Reviewer subagent (Layer 2) and lead agent integration (Layer 3).
+
+#### Design Artifacts Created
+
+**v3 Design Spec** — `docs/plans/2026-02-15-domain-knowledge-subagent-design-v3.md`
+- 914 lines, 21 design decisions finalized
+- 3-layer architecture: Domain Knowledge Skill → Domain Expert Reviewer → Lead Integration
+- 3 review lenses: Terminology Accuracy, Methodological Alignment, Domain-Specific Standards
+- Weighted scoring: 50/25/25 (Analysis / Communication / Domain)
+- ADVISORY severity level for recent workstream learnings (-2 deduction cap)
+- Two-tier digest system: foundational (monthly) + workstream (weekly)
+- Two-stage deduplication: heuristic + LLM fallback
+- Versioned digests with rollback support
+
+**MVP Design Doc** — `docs/plans/2026-02-16-domain-knowledge-mvp-design.md`
+- PM-led design review resolving 5 implementation challenges (A1-A5)
+- A1: Reframed API as file contract + refresh workflow (no callable code)
+- A2: Audience-tagged sections (`all`, `ds`, `eng`) + token budget increased 5K → 8K
+- A3: Manual-only refresh for v0.5 (no auto-discovery, no cron)
+- A4: Dropped team roster (LLM content scoring sufficient for v0.5)
+- A5: Cross-domain gets additive 1,500-token budget (not shared with domain budgets)
+
+**Layer 1 Implementation Plan** — `docs/plans/2026-02-16-domain-knowledge-layer1-implementation-plan.md`
+- 5 tasks, all file creation (markdown + YAML, no scripts)
+- Files: domain-index.yaml, SKILL.md contract, 3 digest files (ranking, QU, cross-domain)
+- Includes full file contents, validation steps, and commit strategy
+- Scope: Layer 1 only. Layer 2 (reviewer) and Layer 3 (integration) deferred
+
+#### Design Sessions (Chronological)
+
+| Date | Session | Key Output |
+|---|---|---|
+| 2026-02-15 | Domain knowledge brainstorm | Initial concept exploration |
+| 2026-02-15 | Domain knowledge design | v3 spec (21 decisions, 8 gaps resolved) |
+| 2026-02-16 | MVP design review | 5 challenges resolved (A1-A5) |
+| 2026-02-16 | Implementation planning | Layer 1 plan (5 tasks, ready to execute) |
+
+#### Architecture Summary
+
+```
+Layer 1 — Domain Knowledge Skill (standalone, reusable)
+├── plugin/config/domain-index.yaml     — Curated domain-to-pages mapping
+├── plugin/skills/domain-knowledge/SKILL.md — Format contract + consumption guide
+└── plugin/digests/                     — Pre-built digest files
+    ├── search-ranking.md               — Ranking/relevance domain knowledge
+    ├── query-understanding.md          — QU pipeline evaluation standards
+    └── search-cross-domain.md          — Cross-cutting search evaluation
+
+Layer 2 — Domain Expert Reviewer (future)
+└── agents/ds-review/domain-expert-reviewer.md — 3 lenses, authority-aware scoring
+
+Layer 3 — Lead Agent Integration (future)
+└── Updates to ds-review-lead.md, SKILL.md, review.md command
+```
+
+#### What's Next
+
+1. **Execute Layer 1 plan** — Create all files per implementation plan
+2. **Layer 2** — Domain Expert Reviewer subagent (3 lenses, deduction tables)
+3. **Layer 3** — Lead integration (--domain flag, 50/25/25 scoring, dedup)
+4. **Calibration** — Run 6 fixtures with 3-dimension scoring vs 2-dimension baselines
+
+---
+
 ## [1.1.0] — 2026-02-16
 
 ### Multi-Agent Platform Migration
