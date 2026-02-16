@@ -8,6 +8,8 @@ All notable changes to the DS Analysis Review Agent.
 
 **Status:** Shipped to GitHub. Installable via `claude plugins install surahli123/ds-analysis-review`.
 
+**Plugin Validation (2026-02-16):** Project-level command `/ds-review` validated post-restart. 7/7 registration checks passed. File-reference approach functioning (single source of truth). Test log: `dev/test-results/2026-02-16-plugin-registration-test.md`.
+
 #### Added
 - **Distribution package** — `dist/ds-analysis-review/` with standalone plugin structure
   - `.claude-plugin/plugin.json` (v1.0.0, auto-discovery, MIT license)

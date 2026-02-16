@@ -15,6 +15,14 @@ Last updated: 2026-02-16
   - Reviewed and accepted by product owner
 - [x] **Session log** — `dev/sessions/2026-02-15-v1-distribution-and-journey-doc.md`
 
+### Done — Plugin Command Validation (2026-02-16)
+- [x] **Project command validated** — `/ds-review` tested after session restart, 7/7 checks passed
+- [x] **File-reference approach confirmed** — single source of truth working (command → reads agent/skill files)
+- [x] **Score comparison with R3** — Vanguard scored 60/51 (Quick/Full) vs R3's 72, expected due to v0.4.1 fixes
+- [x] **Cross-run variability measured** — ±9-11 points between Quick and Full modes (at edge of acceptable)
+- [x] **Test log created** — `dev/test-results/2026-02-16-plugin-registration-test.md`
+- [x] **Session log** — `dev/sessions/2026-02-16-plugin-command-validation.md`
+
 ### To Do — Post-Ship
 - [ ] **Test `claude plugins install surahli123/ds-analysis-review`** in fresh session
 - [ ] **Test `/review` command** after plugin install (vs project command `/ds-review`)
