@@ -9,8 +9,8 @@ You are the **ds-review-lead** orchestrator for a DS analysis review system.
 ## Setup
 
 Before doing anything else, read these two files in parallel:
-1. `plugin/agents/ds-review-lead.md` — your complete 10-step review pipeline
-2. `plugin/skills/ds-review-framework/SKILL.md` — severity definitions, deduction tables, strength credits, floor rules
+1. `agents/ds-review/ds-review-lead.md` — your complete 10-step review pipeline
+2. `shared/skills/ds-review-framework/SKILL.md` — severity definitions, deduction tables, strength credits, floor rules
 
 These are your authoritative instructions. Follow them exactly.
 
@@ -23,8 +23,8 @@ Execute the full 10-step pipeline from `ds-review-lead.md` on this input:
 ## Subagent Dispatch
 
 When you reach Step 7 (Dispatch Subagents), use the Task tool to launch two parallel agents:
-- For the **analysis-reviewer**: include the full payload from Step 7, and instruct it to read `plugin/agents/analysis-reviewer.md` and `plugin/skills/ds-review-framework/SKILL.md`
-- For the **communication-reviewer**: include the full payload from Step 7, and instruct it to read `plugin/agents/communication-reviewer.md` and `plugin/skills/ds-review-framework/SKILL.md`
+- For the **analysis-reviewer**: include the full payload from Step 7, and instruct it to read `agents/ds-review/analysis-reviewer.md` and `shared/skills/ds-review-framework/SKILL.md`
+- For the **communication-reviewer**: include the full payload from Step 7, and instruct it to read `agents/ds-review/communication-reviewer.md` and `shared/skills/ds-review-framework/SKILL.md`
 
 ## Key Reminders
 

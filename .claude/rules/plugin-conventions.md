@@ -1,31 +1,31 @@
-# Plugin Development Conventions
+# Agent Development Conventions
+
+> **Note:** This repository was restructured from a single-plugin model to a multi-agent repository.
+> The conventions below apply to all agents in the repository, not just the ds-review plugin.
 
 ## File Organization
 
 ### Agents
-- One agent per file in `plugin/agents/`
-- Filename should match agent name (e.g., `ds-review-lead.md` for agent named `ds-review-lead`)
-- Use frontmatter for metadata:
-  ```yaml
-  ---
-  name: agent-name
-  description: Brief description
-  ---
-  ```
+- Agent-specific files go in `agents/[agent-name]/`
+- Each agent directory contains:
+  - Agent prompt files (e.g., `ds-review-lead.md`, `analysis-reviewer.md`)
+  - Agent-specific documentation (README.md)
+- Filename should match agent name or role
 
 ### Commands
-- One command per file in `plugin/commands/`
-- Use frontmatter to specify which agent handles the command:
+- Project commands go in `.claude/commands/`
+- One command per file
+- Use frontmatter for configuration:
   ```yaml
   ---
-  name: command-name
   description: What this command does
-  agent: agent-that-handles-it
+  argument-hint: [arg1] [--flag]
+  model: opus
   ---
   ```
 
 ### Skills
-- One skill per directory in `plugin/skills/`
+- Shared skills go in `shared/skills/[skill-name]/`
 - Skill definition in `SKILL.md` within that directory
 - Use frontmatter for metadata:
   ```yaml
@@ -35,6 +35,11 @@
   auto_activate: true/false
   ---
   ```
+
+### Plugin Structure (ds-review)
+The ds-review plugin still maintains `plugin/` for distribution:
+- `plugin/commands/` — plugin command files
+- `plugin/.claude-plugin/` — plugin metadata
 
 ## Agent Prompts
 
@@ -89,7 +94,7 @@ Every agent/command/skill should have:
 
 ## Version Control
 
-- Keep plugin/ clean (only shipping code)
-- Use dev/ for work-in-progress, notes, scratch files
+- Keep `agents/` and `shared/` clean (only shipping code)
+- Use `dev/` for work-in-progress, notes, scratch files
 - Update CHANGELOG.md when shipping features
 - Create ADRs for architectural decisions

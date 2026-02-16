@@ -88,10 +88,10 @@ Dispatch BOTH in parallel using the Task tool. Each gets a separate Task call. P
 You are the [analysis-reviewer | communication-reviewer] agent.
 
 IMPORTANT: First, read the ds-review-framework skill file at
-plugin/skills/ds-review-framework/SKILL.md — it contains severity definitions,
+shared/skills/ds-review-framework/SKILL.md — it contains severity definitions,
 deduction tables, strength credit tables (Section 2b), floor rules, audience
 personas, and routing rules that you must follow. Then read your agent prompt
-at plugin/agents/[your-agent-name].md. Follow both exactly.
+at agents/ds-review/[your-agent-name].md. Follow both exactly.
 You MUST produce a STRENGTH LOG in your output — see Section 2b and your output format.
 
 REVIEW REQUEST

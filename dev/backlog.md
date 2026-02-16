@@ -2,6 +2,28 @@
 
 Last updated: 2026-02-16
 
+## Repository Rebrand Decision (2026-02-16)
+
+**Decision:** Rename repository from `DS-Analysis-Review-Agent` to `ds-productivity-agents` to reflect multi-agent platform scope.
+
+**Rationale:**
+- Building 3 peer-level agents (DS review, SQL review, Search metric analysis)
+- All agents share `search-domain-knowledge` skill infrastructure
+- DS review is domain-agnostic; can work with any domain knowledge skill (Search, Causal, NLP, etc.)
+- SQL review is also domain-agnostic with pluggable domain guidance
+- Metric analysis agent calls both the skill and DS review agent as dependencies
+- "DS Productivity Agents" accurately describes the platform scope
+
+**Status:**
+- [x] Decision made
+- [x] Rename steps documented in `dev/RENAME-STEPS.md`
+- [x] Migration plan written in `dev/migration-plan.md`
+- [x] Execute GitHub rename (COMPLETE - user action)
+- [x] Execute file reorganization (COMPLETE - 2026-02-16)
+- [x] Update documentation (COMPLETE - 2026-02-16)
+
+**Next:** User executes `dev/RENAME-STEPS.md`, then file reorganization happens during v0.5 implementation per `dev/migration-plan.md`.
+
 ## Current Sprint: v1.0 — Public Distribution (SHIPPED)
 
 ### Done — v1.0 Distribution (2026-02-15)

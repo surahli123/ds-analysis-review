@@ -1,20 +1,24 @@
-# DS Analysis Review Agent
+# DS Productivity Agents
 
 ## What This Is
-Claude Code plugin that reviews DS analyses across two dimensions:
-- Analysis: methodology, logic, completeness, metrics
-- Communication: narrative, audience fit, visualization, actionability
+A suite of Claude Code agents for DS productivity in Search Relevance:
+- **DS Analysis Review Agent:** Reviews DS analyses across methodology, logic, communication, and domain expertise
+- **SQL Review Agent:** (Q2 2026) Reviews SQL queries for syntax and domain-specific patterns
+- **Search Metric Analysis Agent:** (Q2 2026) Analyzes search metrics and generates insights
 
-Uses a lead orchestrator agent (ds-review-lead) that dispatches two
-reviewer subagents, synthesizes their outputs, and adds a top-level assessment.
-
-Long-term: prompts are also deployed via Agent Studio for non-technical users.
+All agents share domain knowledge infrastructure for consistent Search Relevance expertise.
 
 ## Agent Architecture
-- ds-review-lead.md — orchestrator (invoked via /ds-review:review command or natural language, explicit only)
+
+### DS Analysis Review
+- ds-review-lead.md — orchestrator (invoked via /ds-review command)
 - analysis-reviewer.md — subagent for analysis dimension
 - communication-reviewer.md — subagent for communication dimension
-- ds-review-framework SKILL — shared rubrics and personas (auto-loaded)
+- domain-expert-reviewer.md — subagent for domain dimension (v0.5+)
+
+### Shared Skills
+- ds-review-framework — shared rubrics and personas (auto-loaded)
+- search-domain-knowledge — Search Relevance domain expertise (v0.5+)
 
 ## Current State
 See dev/backlog.md for priorities.
