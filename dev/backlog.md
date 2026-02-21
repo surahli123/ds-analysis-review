@@ -1,6 +1,6 @@
 # Development Backlog
 
-Last updated: 2026-02-16
+Last updated: 2026-02-21
 
 ## Repository Rebrand Decision (2026-02-16)
 
@@ -269,13 +269,17 @@ Last updated: 2026-02-16
 - [x] **Design session logs** — `dev/sessions/2026-02-15-domain-knowledge-session-log.md`, `dev/sessions/2026-02-16-domain-knowledge-layer1-planning.md`
 - [x] **Repository structure prepared** — `shared/skills/search-domain-knowledge/` ready for implementation
 
-#### Next — Layer 1 Implementation (next session)
-- [ ] Execute Layer 1 plan: `dev/internal/2026-02-16-domain-knowledge-layer1-implementation-plan.md`
-  - Task 1: domain-index.yaml (curated YAML index, 2 sub-domains + cross-domain)
-  - Task 2: SKILL.md (digest format contract, consumption guide, staleness rules)
-  - Task 3: search-ranking.md digest (foundational knowledge + workstream placeholders)
-  - Task 4: query-understanding.md + search-cross-domain.md digests
-  - Task 5: Validation and cleanup
+#### Done — Layer 1 Implementation (2026-02-21)
+- [x] Execute Layer 1 plan: `dev/internal/2026-02-16-domain-knowledge-layer1-implementation-plan.md`
+  - [x] Research phase: 55 sources across 4 batches (public data proxy approach)
+  - [x] Task 1: domain-index.yaml (curated YAML index, 2 sub-domains + cross-domain, 14 sources)
+  - [x] Task 2: SKILL.md (digest format contract, consumption guide, staleness rules, 6 sections)
+  - [x] Task 3: search-ranking.md digest (5,076 words, 14 cited + 6 [DEMO])
+  - [x] Task 4: query-understanding.md digest (3,956 words, 15 cited + 5 [DEMO])
+  - [x] Task 4: search-cross-domain.md digest (1,094 words, 5 cited)
+  - [x] Task 5: Validation and cleanup
+- Research doc available at `docs/research/domain-knowledge-references.md`
+- Ready for Layer 2 (Domain Expert Reviewer subagent)
 
 #### Future — Layer 2 & 3 (after Layer 1 validated)
 - [ ] Create `agents/ds-review/domain-expert-reviewer.md` (3 lenses, authority-aware scoring)
