@@ -1,6 +1,6 @@
 # Development Backlog
 
-Last updated: 2026-02-21
+Last updated: 2026-02-21 (PR #4 merged, R4 domain calibration passed)
 
 ## Repository Rebrand Decision (2026-02-16)
 
@@ -281,14 +281,41 @@ Last updated: 2026-02-21
 - Research doc available at `docs/research/domain-knowledge-references.md`
 - Ready for Layer 2 (Domain Expert Reviewer subagent)
 
-#### Future — Layer 2 & 3 (after Layer 1 validated)
-- [ ] Create `agents/ds-review/domain-expert-reviewer.md` (3 lenses, authority-aware scoring)
-- [ ] Update `shared/skills/ds-review-framework/SKILL.md` with domain dimension rubrics + ADVISORY severity
-- [ ] Update `agents/ds-review/ds-review-lead.md` for 3-dimension scoring (--domain flag, 50/25/25)
-- [ ] Update `plugin/commands/review.md` with --domain, --reference, --refresh-domain flags
-- [ ] Calibration R4+: Test with domain dimension, adjust DR curve if needed
+#### Done — Layer 2 Implementation (2026-02-21, PR #4)
+- [x] Create `agents/ds-review/domain-expert-reviewer.md` (3 lenses, authority-aware scoring, 13 rules)
+- [x] Update `shared/skills/ds-review-framework/SKILL.md` with domain dimension rubrics + ADVISORY severity (25 deduction types, 11 credit types)
+- [x] Update `agents/ds-review/ds-review-lead.md` for 3-dimension scoring (--domain flag, 50/25/25, Step 6.5, dedup)
+- [x] Update `.claude/commands/ds-review.md` with --domain, --reference, --refresh-domain flags
+- [x] Add domain-aware guardrail (Rule 10) to analysis-reviewer.md
+- [x] Integration smoke test: 22/22 cross-file consistency checks passed
+- [x] All 8 PSE findings incorporated
+- Session log: `dev/sessions/2026-02-21-domain-knowledge-layer2-implementation.md`
+
+#### Done — Layer 2 Review, Merge & Calibration (2026-02-21)
+- [x] **PR #4 reviewed and merged** — 22/22 cross-file consistency checks confirmed, fast-forward merge to main (7 commits)
+- [x] **R4 backward compatibility test:** Vanguard without `--domain` scored 57/100 (Analysis 56, Communication 57). No domain content leaked.
+- [x] **Search-domain test fixture created:** `dev/test-fixtures/synthetic/09-search-ranking-domain-issues.md` — 5 planted domain issues
+- [x] **R4 domain calibration test:** Full 3-dimension review with `--domain search-ranking`
+  - **5/5 planted issues detected** at exact severity and deduction values
+  - Cross-dimension dedup fired correctly (3 analysis findings suppressed in favor of domain versions)
+  - Diminishing returns compressed domain raw 103 → effective 71.5
+  - Final score: 55/100 (Analysis 63, Communication 64, Domain 30) — Major Rework verdict
+  - Domain reviewer added genuine value vs 2-dimension review
+- [x] **Pushed to remote** — all changes on main
+
+#### To Do — R4 Extended Calibration (NEXT UP)
+- [ ] **Primary tuning fix:** Reduce credit cap from +25 → +15 per dimension (addresses R3 inflation)
+- [ ] **Secondary tuning (if needed):** Increase 2-3 MAJOR deductions by +2 each
+- [ ] **Re-run all 6 R3 fixtures** with `--domain search-ranking` for cross-genre comparison
+- [ ] **Cross-run consistency:** Same doc 3x with `--domain`, verify scores within ±10
 - [ ] Evaluate whether recalibrated scores are reasonable across genres without format detection
 - [ ] If still off: design `--format` parameter or auto-detection (ADR needed)
+
+#### Calibration Watch Items (Monitor During R4, Don't Pre-Fix)
+- Credit-to-deduction ratio: domain credits (+5) easier to earn than analysis credits (+8). Watch for score inflation.
+- Position bias contextual rule (CRITICAL vs MAJOR) may be hard for reviewer to calibrate consistently.
+- Multi-objective tradeoffs at MINOR (-7) may need bumping if frequently missed.
+- Head-tail distribution emphasis: if tail queries underweighted, consider dedicated deduction row.
 
 ### v1.0: Ship — COMPLETE (2026-02-15)
 - [x] All agents passing manual eval rubric

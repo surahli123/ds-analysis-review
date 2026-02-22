@@ -6,9 +6,36 @@ All notable changes to DS Productivity Agents (formerly DS Analysis Review Agent
 
 ### v0.5 — Domain Expert Agent: Design & Layer 1 Implementation (2026-02-16 to 2026-02-21)
 
-**Status:** Layer 1 implementation complete. Design artifacts + all Layer 1 files created.
+**Status:** Layer 1 + Layer 2 complete. PR #4 merged. R4 domain calibration passed (5/5 planted issues detected).
 
 **Goal:** Add a 3rd review dimension (Domain Knowledge) to the DS Review agent. Standalone Domain Knowledge Skill (Layer 1) that any agent can consume, plus a thin Domain Expert Reviewer subagent (Layer 2) and lead agent integration (Layer 3).
+
+#### Layer 2 Implementation (2026-02-21) — PR #4
+
+- **New subagent** — `agents/ds-review/domain-expert-reviewer.md` (144 lines)
+  - 3 lenses: Technique Appropriateness, Benchmark & External Validity, Domain Pitfall Awareness
+  - Authority-aware scoring: `[authority: authoritative]` → full deductions, `[authority: advisory]` → capped at ADVISORY (-2)
+  - Web search verification with 3-5 search budget and hallucination guard
+  - 13 rules, output format matches existing subagents + Authority field
+- **SKILL.md expanded** — `shared/skills/ds-review-framework/SKILL.md`
+  - ADVISORY severity level (4th tier: capped at -2, never triggers floor rules)
+  - Domain Knowledge deduction table: 25 issue types across 3 lenses (7+9+9)
+  - Domain Knowledge credit table: 11 strength types (+36 possible, capped at +25)
+  - Floor rules 5-6: ADVISORY exclusion + cross-dimension equality
+  - 7 domain routing rows + cross-dimension dedup rules in Section 5
+  - All 8 PSE (Principal Search Engineer) findings incorporated
+- **Lead agent updated** — `agents/ds-review/ds-review-lead.md`
+  - Step 6.5: Domain digest loading with staleness checks (<14d/14-30d/>30d/missing)
+  - Step 7: Conditional 3rd subagent dispatch with domain context brief
+  - Step 8: 3-subagent failure handling with fallback weights
+  - Step 9: Two-stage cross-dimension dedup + 50/25/25 scoring formula
+  - Step 10: 11-row dashboard, Domain Knowledge section, ADVISORY emoji (📋)
+- **Analysis reviewer guardrail** — `agents/ds-review/analysis-reviewer.md` Rule 10
+  - Defers domain-specific findings to domain-expert-reviewer when `--domain` active
+  - Benchmark routing clarification per PSE review
+- **Command file updated** — `.claude/commands/ds-review.md`
+  - New flags: `--domain d1,d2,...`, `--reference path`, `--refresh-domain domain`
+  - 3-dimension review (50/25/25) with `--domain`; backward-compatible 2-dimension (50/50) without
 
 #### Layer 1 Implementation (2026-02-21)
 
@@ -71,19 +98,37 @@ Layer 1 — Domain Knowledge Skill (standalone, reusable)
     ├── query-understanding.md          — QU pipeline evaluation standards
     └── search-cross-domain.md          — Cross-cutting search evaluation
 
-Layer 2 — Domain Expert Reviewer (future)
-└── agents/ds-review/domain-expert-reviewer.md — 3 lenses, authority-aware scoring
-
-Layer 3 — Lead Agent Integration (future)
-└── Updates to ds-review-lead.md, SKILL.md, review.md command
+Layer 2 — Domain Expert Reviewer (PR #4)
+├── agents/ds-review/domain-expert-reviewer.md — 3 lenses, authority-aware scoring
+├── shared/skills/ds-review-framework/SKILL.md — ADVISORY severity, domain deduction/credit tables
+├── agents/ds-review/ds-review-lead.md         — Step 6.5, 3-way dispatch, 50/25/25 scoring
+├── agents/ds-review/analysis-reviewer.md      — Rule 10: domain-aware guardrail
+└── .claude/commands/ds-review.md              — --domain, --reference, --refresh-domain
 ```
+
+#### PR #4 Merged & R4 Calibration (2026-02-21)
+
+- **PR #4 merged to main** — 7 commits, fast-forward merge, pushed to remote
+- **Backward compatibility confirmed** — Vanguard without `--domain`: 57/100 (no domain content leaked)
+- **Search-domain test fixture** — `dev/test-fixtures/synthetic/09-search-ranking-domain-issues.md` (5 planted issues)
+- **R4 domain calibration results:**
+  - 5/5 planted issues detected at exact severity/deduction values
+  - Cross-dimension dedup: 3 analysis findings correctly suppressed for domain versions
+  - Diminishing returns: domain raw 103 → effective 71.5 (31% compression)
+  - Final: 55/100 (Analysis 63, Communication 64, Domain 30) — Major Rework
+  - Floor rules: 5 CRITICALs correctly triggered 2+ CRITICAL cap
+  - Authority-aware scoring: all findings correctly tagged authoritative
+  - Domain reviewer added genuine value over 2-dimension review
 
 #### What's Next
 
-1. **Execute Layer 1 plan** — Create all files per implementation plan
-2. **Layer 2** — Domain Expert Reviewer subagent (3 lenses, deduction tables)
-3. **Layer 3** — Lead integration (--domain flag, 50/25/25 scoring, dedup)
-4. **Calibration** — Run 6 fixtures with 3-dimension scoring vs 2-dimension baselines
+1. **R4 extended calibration** — Re-run all 6 R3 fixtures with `--domain search-ranking`
+2. **Credit cap tuning** — Reduce +25 → +15 if score inflation persists
+3. **Cross-run consistency** — Same doc 3x with `--domain`, verify ±10
+4. **Calibration watch items** (monitor, don't pre-fix):
+   - Credit-to-deduction ratio: domain credits (+5 for standard technique) may inflate scores
+   - Position bias contextual rule (CRITICAL vs MAJOR) may be hard to calibrate — watch for inconsistency
+   - Multi-objective tradeoffs at MINOR (-7) may need bumping if frequently missed
 
 ---
 
