@@ -4,11 +4,26 @@ All notable changes to DS Productivity Agents (formerly DS Analysis Review Agent
 
 ## [Unreleased]
 
-### v0.5 — Domain Expert Agent: Design & Planning (2026-02-16)
+### v0.5 — Domain Expert Agent: Design & Layer 1 Implementation (2026-02-16 to 2026-02-21)
 
-**Status:** Design complete. Implementation plan ready. No code written yet.
+**Status:** Layer 1 implementation complete. Design artifacts + all Layer 1 files created.
 
 **Goal:** Add a 3rd review dimension (Domain Knowledge) to the DS Review agent. Standalone Domain Knowledge Skill (Layer 1) that any agent can consume, plus a thin Domain Expert Reviewer subagent (Layer 2) and lead agent integration (Layer 3).
+
+#### Layer 1 Implementation (2026-02-21)
+
+- **Research doc** — `docs/research/domain-knowledge-references.md` with 55 sources across 4 batches
+  - Batch 1: Search Ranking (metrics, LTR, position bias, click models) — 15 sources
+  - Batch 2: Query Understanding (intent, spell correction, rewriting) — 14 sources
+  - Batch 3: Cross-Domain + Industry Case Studies — 14 sources
+  - Batch 4: Emerging Paradigms (AI Search, Agentic Search, Generative Retrieval) — 12 sources (added per product owner request)
+- **domain-index.yaml** — `shared/skills/search-domain-knowledge/config/domain-index.yaml` (14 curated sources, 3 domains)
+- **SKILL.md contract** — `shared/skills/search-domain-knowledge/SKILL.md` (6 sections: digest format, consumption, staleness, refresh, scoring, precedence)
+- **3 digest files:**
+  - `search-ranking.md` — 5,076 words, 14 cited sources + 6 [DEMO] synthetic workstream entries
+  - `query-understanding.md` — 3,956 words, 15 cited sources + 5 [DEMO] synthetic workstream entries
+  - `search-cross-domain.md` — 1,094 words, 5 cited sources (foundational only, no workstream in cross-domain for MVP)
+- **Public data proxy approach:** All sources are public (papers, engineering blogs, conference proceedings). Synthetic [DEMO] entries demonstrate how internal team decisions would be documented.
 
 #### Design Artifacts Created
 
@@ -49,9 +64,9 @@ All notable changes to DS Productivity Agents (formerly DS Analysis Review Agent
 
 ```
 Layer 1 — Domain Knowledge Skill (standalone, reusable)
-├── plugin/config/domain-index.yaml     — Curated domain-to-pages mapping
-├── plugin/skills/domain-knowledge/SKILL.md — Format contract + consumption guide
-└── plugin/digests/                     — Pre-built digest files
+├── shared/skills/search-domain-knowledge/config/domain-index.yaml — Curated source index
+├── shared/skills/search-domain-knowledge/SKILL.md                 — Format contract + consumption guide
+└── shared/skills/search-domain-knowledge/digests/                 — Pre-built digest files
     ├── search-ranking.md               — Ranking/relevance domain knowledge
     ├── query-understanding.md          — QU pipeline evaluation standards
     └── search-cross-domain.md          — Cross-cutting search evaluation
@@ -181,9 +196,9 @@ Agent Layer:
 
 ---
 
-## [Unreleased]
+## [0.4.1] — 2026-02-15
 
-### v0.4.1 — Credit Redesign + R3 Calibration + Emoji Dashboard (2026-02-15)
+### Credit Redesign + R3 Calibration + Emoji Dashboard
 
 **Status:** Merged to main via PR #1. R4 calibration pending.
 
